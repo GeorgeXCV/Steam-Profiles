@@ -7,6 +7,9 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: true })); 
 
+app.set('view engine', 'ejs');
+app.set('views', __dirname);
+
 function runAsyncWrapper (callback) {
   return function (req, res, next) {
     callback(req, res, next)
@@ -16,8 +19,9 @@ function runAsyncWrapper (callback) {
 
 app.post('/getuserid', runAsyncWrapper(async(req, res) => {
   const userID = await getSteamUserID(req.body.steamid);
-  const games = await getOwnedGames(userID)
-  await getOwendGamesWithAchievementSupport(games, userID)
+  const games = await getOwnedGames(userID);
+  const supportedGames = await getOwendGamesWithAchievementSupport(games, userID);
+  res.render('profile.ejs', {gamedata: supportedGames})
 }))
 
 const port = 8080;
@@ -55,6 +59,7 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
                   supportedGames.push(game)
                } 
         }))
+        return supportedGames;
     } catch (error) {
       console.log("Failed to get supported games. Error: " + error);
     }
@@ -69,7 +74,6 @@ async function getUserGameAchievements(userID, appID) {
       // console.log("Failed to get user achievements. Error: " + error)
   }
 }
-
 // https://steamcommunity.com/id/georgea95/
 
 // [
