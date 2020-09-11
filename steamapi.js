@@ -33,7 +33,6 @@ app.listen(port, () => {
 async function getSteamUserID(url) {
     try {
         const userID = await steam.resolve(url);
-        console.log(userID);
         return userID;
     } catch (error) {
         console.log("Failed to get Steam User ID. Error: " + error);
@@ -51,15 +50,15 @@ async function getOwnedGames(userID) {
 
 async function getOwendGamesWithAchievementSupport(games, userID) {
     try { 
-        let supportedGames = [];
-
+        let achievements = [];
         await Promise.all(games.map(async (game) => {
-          const achievements = await getUserGameAchievements(userID, game.appID);
-          if (achievements) {
-                  supportedGames.push(game)
+          const gameAchievements = await getUserGameAchievements(userID, game.appID);
+          if (gameAchievements) {
+                  gameAchievements.logo = game.logoURL // Add image from game object to achievement object
+                  achievements.push(gameAchievements);
                } 
         }))
-        return supportedGames;
+        return achievements;
     } catch (error) {
       console.log("Failed to get supported games. Error: " + error);
     }
@@ -75,6 +74,32 @@ async function getUserGameAchievements(userID, appID) {
   }
 }
 // https://steamcommunity.com/id/georgea95/
+
+// PlayerAchievements {
+//   steamID: '76561198001183532',        
+//   gameName: "Assassin's Creed Origins",
+//   achievements: [
+//     Achievement {
+//       api: '001',
+//       name: 'First Steps',
+//       description: '',
+//       achieved: true,
+//       unlockTime: 1553361663
+//     },
+//     Achievement {
+//       api: '002',
+//       name: "I'm Just Getting Started",
+//       description: '',
+//       achieved: true,
+//       unlockTime: 1553372496
+//     },
+//     Achievement {
+//       api: '060',
+//       name: 'Archeologist',
+//       description: 'Complete all tours in the Daily Life category',
+//       achieved: false,
+//       unlockTime: 0
+//     },
 
 // [
 //   Game {
