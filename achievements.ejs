@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Steam Profiles - Steam Achievement Tracker</title>
+    <meta charset="UTF-8">
+    <meta name="Description" content = "Track your Steam Achievements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="steamprofiles.css">
+</head>
+
+<body>
+    <div class="header">
+    <h1>Achievements</h1>
+    </div>
+
+    <div class="user-achievements">
+        <table id="achievementsTable">
+            <tbody>
+                <% for(var i=0; i<game.achievements.length; i++) {%>
+                    <tr>
+                        <td>
+                            <a href="temp">
+                            <img src="<%= achievementData.availableGameStats.achievements[i].icon %>" alt="" height="56" width="56"> 
+                             </a>
+                        </td>
+                        <td>
+                            <a href="temp">
+                            <%= game.achievements[i].name %>
+                        </td>
+                            </a>
+
+                        <td>
+                            <%= game.achievements[i].description %>
+                        </td>
+
+                        <td>
+                            <%= game.achievements[i].achieved %>
+                        </td>
+
+                        <td>
+                            <%= game.achievements[i].unlockTime %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

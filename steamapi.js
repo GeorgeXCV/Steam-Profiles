@@ -10,6 +10,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
 
+const port = 8080;
+
+app.listen(port, () => {
+  console.log(`Server running on port: ${port}`);
+});
+
+let supportedGames;
+
 function runAsyncWrapper (callback) {
   return function (req, res, next) {
     callback(req, res, next)
@@ -20,15 +28,21 @@ function runAsyncWrapper (callback) {
 app.post('/getuserid', runAsyncWrapper(async(req, res) => {
   const userID = await getSteamUserID(req.body.steamid);
   const games = await getOwnedGames(userID);
-  const supportedGames = await getOwendGamesWithAchievementSupport(games, userID);
+  supportedGames = await getOwendGamesWithAchievementSupport(games, userID);
   res.render('profile.ejs', {gamedata: supportedGames})
 }))
 
-const port = 8080;
+app.get('/achievements', runAsyncWrapper(async(req, res) => { 
+  const index = req.query.id
+  const appID = req.query.app
 
-app.listen(port, () => {
-  console.log(`Server running on port: ${port}`);
-});
+  const achievements = await getGameAchievements(appID)
+
+  res.render('achievements.ejs', {
+    game: supportedGames[index],
+    achievementData: achievements
+  });
+ }));
 
 async function getSteamUserID(url) {
     try {
@@ -54,6 +68,7 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
         await Promise.all(games.map(async (game) => {
           const gameAchievements = await getUserGameAchievements(userID, game.appID);
           if (gameAchievements) {
+                  gameAchievements.appID = game.appID  // Copy App ID because needed for request to get game achievement images
                   gameAchievements.logo = game.logoURL // Add image from game object to achievement object
                   achievements.push(gameAchievements);
                } 
@@ -62,6 +77,15 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
     } catch (error) {
       console.log("Failed to get supported games. Error: " + error);
     }
+}
+
+async function getGameAchievements(appID) {
+  try {
+     const achievements = await steam.getGameSchema(appID)
+     return achievements;
+  } catch (error) {
+    console.log("Failed to get Game Achievements. Error: " + error)
+  }
 }
 
 async function getUserGameAchievements(userID, appID) {
@@ -101,6 +125,20 @@ async function getUserGameAchievements(userID, appID) {
 //       unlockTime: 0
 //     },
 
+
+// Get Schema 
+// "achievements": [
+//   {
+//       "name": "TF_PLAY_GAME_EVERYCLASS",
+//       "defaultvalue": 0,
+//       "displayName": "Head of the Class",
+//       "hidden": 0,
+//       "description": "Play a complete round with every class.",
+//       "icon": "http://media.steampowered.com/steamcommunity/public/images/apps/440/tf_play_game_everyclass.jpg",
+//       "icongray": "http://media.steampowered.com/steamcommunity/public/images/apps/440/tf_play_game_everyclass_bw.jpg"
+//   },
+
+// Get Owned Games
 // [
 //   Game {
 //     name: 'Half-Life',

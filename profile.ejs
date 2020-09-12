@@ -14,8 +14,16 @@
             <tbody>
                 <% for(var i=0; i<gamedata.length; i++) {%>
                 <tr>
-                    <td><img src="<%= gamedata[i].logo %>" alt="" height="56" width="100"> </td>
-                    <td><%= gamedata[i].gameName %></td>
+                    <td>
+                        <a href="/achievements?=<%= gamedata[i].gameName %>">
+                        <img src="<%= gamedata[i].logo %>" alt="" height="56" width="100"> 
+                         </a>
+                    </td>
+                    <td>
+                        <a href="/achievements?id=<%=[i]%>&app=<%=gamedata[i].appID%>">
+                        <%= gamedata[i].gameName %>
+                    </td>
+                        </a>
                 </tr>
                 <% } %>
             </tbody>
