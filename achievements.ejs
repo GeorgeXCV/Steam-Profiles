@@ -16,26 +16,23 @@
         <table id="achievementsTable">
             <tbody>
                 <% for(var i=0; i<game.achievements.length; i++) {%>
-                    <tr>
+                    <tr class="achievement">
                         <td>
                             <a href="temp">
+                            <% if (game.achievements[i].achieved === true) { %>
                             <img src="<%= achievementData.availableGameStats.achievements[i].icon %>" alt="" height="56" width="56"> 
+                            <% } else { %>
+                                <img src="<%= achievementData.availableGameStats.achievements[i].icongray %>" alt="" height="56" width="56"> 
+                            <% } %>
                              </a>
                         </td>
                         <td>
-                            <a href="temp">
+                            <a class="name" href="temp">
                             <%= game.achievements[i].name %>
-                        </td>
                             </a>
-
-                        <td>
+                            <br>
                             <%= game.achievements[i].description %>
                         </td>
-
-                        <td>
-                            <%= game.achievements[i].achieved %>
-                        </td>
-
                         <td>
                             <% if (game.achievements[i].achieved === true) { %>
                             <%= moment.unix(game.achievements[i].unlockTime).format('llll') %>
