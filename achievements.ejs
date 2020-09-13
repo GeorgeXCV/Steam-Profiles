@@ -38,6 +38,11 @@
                             <%= moment.unix(game.achievements[i].unlockTime).format('llll') %>
                             <% } %>
                         </td>
+                        <td>
+                            <%= achievementData.availableGameStats.achievements[i].percentage %>
+                            <br>
+                            <%= achievementData.availableGameStats.achievements[i].rarity %>
+                        </td>
                     </tr>
                     <% } %>
             </tbody>

@@ -39,6 +39,23 @@ app.get('/achievements', runAsyncWrapper(async(req, res) => {
   const appID = req.query.app
 
   const achievements = await getGameAchievements(appID)
+  const globalStats = await getGlobalAchievementsStats(appID);
+
+  for(var i = 0; i < achievements.availableGameStats.achievements.length; i++) {
+     let percentage = Math.round(globalStats.achievementpercentages.achievements[i].percent);
+     let rarity = "";
+     if (percentage >= 50) {
+        rarity = "Common"
+     } else if (percentage >= 25 && percentage <= 50) {
+        rarity = "Uncommon"
+     } else if (percentage >= 10 && percentage <= 25) {
+        rarity = "Rare"
+     } else if (percentage <= 10) {
+        rarity = "Ultra Rare"
+    }
+     achievements.availableGameStats.achievements[i].percentage = percentage.toString() + "%";
+     achievements.availableGameStats.achievements[i].rarity = rarity
+  }
 
   res.render('achievements.ejs', {
     game: supportedGames[index],
@@ -105,6 +122,19 @@ async function getGameAchievements(appID) {
     console.log("Failed to get Game Achievements. Error: " + error)
   }
 }
+
+async function getGlobalAchievementsStats(appID) {
+  try {
+     const globalAchievements = await steam.get(`/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=${appID}`,
+      `http://api.steampowered.com`,
+      `D03CA2B80CAEC610FC852C3140540C58`
+      )
+     return globalAchievements;
+  } catch (error) {
+    console.log("Failed to get Global Achievements Stats. Error: " + error)
+  }
+}
+
 
 async function getUserGameAchievements(userID, appID) {
   try {
