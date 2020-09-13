@@ -1,11 +1,13 @@
 const SteamAPI = require('steamapi');
 const steam = new SteamAPI("D03CA2B80CAEC610FC852C3140540C58");
-
+const moment = require('moment');
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: true })); 
+
+app.locals.moment = require('moment');
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
@@ -81,7 +83,7 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
 
 async function getGameAchievements(appID) {
   try {
-     const achievements = await steam.getGameSchema(appID)
+     const achievements = await steam.getGameSchema(appID);
      return achievements;
   } catch (error) {
     console.log("Failed to get Game Achievements. Error: " + error)

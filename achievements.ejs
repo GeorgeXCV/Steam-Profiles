@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="steamprofiles.css">
 </head>
-
 <body>
     <div class="header">
     <h1>Achievements</h1>
@@ -38,7 +37,9 @@
                         </td>
 
                         <td>
-                            <%= game.achievements[i].unlockTime %>
+                            <% if (game.achievements[i].achieved === true) { %>
+                            <%= moment.unix(game.achievements[i].unlockTime).format('llll') %>
+                            <% } %>
                         </td>
                     </tr>
                     <% } %>
