@@ -22,8 +22,11 @@
                     <td>
                         <a href="/achievements?id=<%=[i]%>&app=<%=gamedata[i].appID%>">
                         <%= gamedata[i].gameName %>
-                    </td>
                         </a>
+                        <div class="progress">
+                            <%= gamedata[i].progress %>
+                        </div>
+                    </td>
                 </tr>
                 <% } %>
             </tbody>

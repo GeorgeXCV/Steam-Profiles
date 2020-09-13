@@ -72,6 +72,20 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
           if (gameAchievements) {
                   gameAchievements.appID = game.appID  // Copy App ID because needed for request to get game achievement images
                   gameAchievements.logo = game.logoURL // Add image from game object to achievement object
+
+                  // Loop through achievements and add string to object which shows user progress
+                  let achieved = 0;
+                  for(var i = 0; i < gameAchievements.achievements.length; i++) {
+                      if (gameAchievements.achievements[i].achieved == true) {
+                        achieved++
+                      }
+                  }
+                  if (achieved == gameAchievements.achievements.length) {
+                    gameAchievements.progress = `All ${achieved} Achievements` 
+                  } else {
+                    gameAchievements.progress = `${achieved} of ${gameAchievements.achievements.length} Achievements` 
+                  }
+
                   achievements.push(gameAchievements);
                } 
         }))
@@ -80,7 +94,7 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
       console.log("Failed to get supported games. Error: " + error);
     }
 }
-
+ 
 async function getGameAchievements(appID) {
   try {
      const achievements = await steam.getGameSchema(appID);
@@ -99,7 +113,7 @@ async function getUserGameAchievements(userID, appID) {
       // console.log("Failed to get user achievements. Error: " + error)
   }
 }
-// https://steamcommunity.com/id/georgea95/
+// 
 
 // PlayerAchievements {
 //   steamID: '76561198001183532',        
