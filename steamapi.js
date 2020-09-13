@@ -81,9 +81,11 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
                       }
                   }
                   if (achieved == gameAchievements.achievements.length) {
-                    gameAchievements.progress = `All ${achieved} Achievements` 
+                    gameAchievements.progress = `All ${achieved} Achievements`
+                    gameAchievements.progressPercentage = "100%"; 
                   } else {
                     gameAchievements.progress = `${achieved} of ${gameAchievements.achievements.length} Achievements` 
+                    gameAchievements.progressPercentage = Math.round((achieved / gameAchievements.achievements.length) * 100).toString() + "%";                  
                   }
 
                   achievements.push(gameAchievements);
@@ -113,7 +115,7 @@ async function getUserGameAchievements(userID, appID) {
       // console.log("Failed to get user achievements. Error: " + error)
   }
 }
-// 
+// https://steamcommunity.com/id/georgea95/
 
 // PlayerAchievements {
 //   steamID: '76561198001183532',        
