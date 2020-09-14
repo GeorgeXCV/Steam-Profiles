@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="Description" content = "Track your Steam Achievements.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="steamprofiles.css">
+    <link rel="stylesheet" href="profile.css">
 </head>
 
 <body>
@@ -16,11 +16,11 @@
                 <tr>
                     <td>
                         <a href="/achievements?=<%= gamedata[i].gameName %>">
-                        <img src="<%= gamedata[i].logo %>" alt="" height="56" width="100"> 
+                        <img src="<%= gamedata[i].logo %>" alt="" height="72" width="184"> 
                          </a>
                     </td>
                     <td>
-                        <a href="/achievements?id=<%=[i]%>&app=<%=gamedata[i].appID%>">
+                        <a class="game" href="/achievements?id=<%=[i]%>&app=<%=gamedata[i].appID%>">
                         <%= gamedata[i].gameName %>
                         </a>
                         <div class="progress">
