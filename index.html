@@ -11,16 +11,36 @@
 <body>
     <div class="header">
     <h1>Steam Profiles</h1>
+    <h2>Copy your Steam Profile URL and Paste it below</h2>
     </div>
+
 
     <div class="user-search">
         <form action="http://localhost:8080/getuserid" method="POST">
-        <input id="steamid" placeholder="Enter your Steam ID" name="steamid", type="text"/>
+        <input id="steamid" placeholder="https://steamcommunity.com/id/yourid/" name="steamid", type="text"/>
         <div class="button">
-            <button type="submit" class="search button">Update User</button>
+            <button id="submit" type="submit" class="search button">Update User</button>
         </form>    
         </div>
         </div>
     </div>
 </body>
+
+<footer>
+    <div class="footer">
+                <div class="disclaimer">
+                    <p>Steam Profiles is not affiliated with Valve in any way
+                        <br>
+                    © 2020 George Ashton</p>
+               
+                </div>
+                <div class="links">
+                    <a class="contact-us" href="mailto:contact@123.com">Contact Us</a>
+                    <bullet>•</bullet>
+                    <a class="terms" href="terms.html">Terms & Conditions</a>
+                    <bullet>•</bullet>
+                    <a class="privacy" href="privacy.html">Privacy Policy</a>
+                </div>
+        </div>
+</footer>
 </html>

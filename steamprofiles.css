@@ -1,13 +1,73 @@
 body {
     background-color: black;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
   }
 
 h1 {
     color: white;
-    margin-left: 20px;
+    /* margin-left: 20px; */
   }
 
-  td a {
+h2 {
+  color: white;
+}
+
+#steamid {
+  height: 30px;
+  width: 300px;
+}
+
+#submit {
+  background: slategray;
+  border: none;
+  color: white;
+  font-weight: 500;
+  font-size: 15;
+  line-height: 1.9rem;
+  text-align: center;
+  width: 130px;
+}
+
+td a {
     width: 100%;
     display: block;
   }
+
+a {
+    text-decoration: none;
+}
+
+footer {
+  font-size: 13px;
+  line-height: 1.6rem;
+}
+
+footer a {
+  color:white;
+}
+
+.disclaimer {
+  color: white;
+  line-height: 16px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-align: left;
+}
+
+.links {
+  color: white;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+bullet {
+  padding: 0 1px;
+  font-size: 1.7rem;
+  vertical-align: -2px;
+  line-height: 0;
+  color: #a2a4a5;
+}
