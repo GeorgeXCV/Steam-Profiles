@@ -25,3 +25,30 @@ a {
     font-size: 14px;
     text-align: left;
 }
+
+.progress-bar {
+    height: 20px;
+    width: 126px;
+    background: #BABABA;
+    position: relative;
+}
+
+.progress-bar span {
+    color: #f9f9f9;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 15px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.progress-bar div.bar {
+    height: 20px;
+    background: #336291;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

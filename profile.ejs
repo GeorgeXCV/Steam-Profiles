@@ -29,7 +29,8 @@
                     </td>
                     <td>
                         <div class="progress-bar">
-                            <%= gamedata[i].progressPercentage %>
+                            <span><%= gamedata[i].progressPercentage %></span>
+                            <div class="bar" style="width: <%= gamedata[i].progressPercentage %>"></div>
                         </div>
                     </td>
                 </tr>
