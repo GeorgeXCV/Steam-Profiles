@@ -1,0 +1,59 @@
+body {
+    background-color: black;
+    color: white;
+  }
+
+a {
+    text-decoration: none;
+}
+
+.name {
+    color: white;
+    font-size: 20px;
+    font-family: "Motiva Sans";
+    font-weight: 900; 
+    text-align: left;
+}
+
+.description {
+    height: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: white;
+    font-family: "Motiva Sans";
+    font-size: 15px;
+    text-align: left;
+}
+
+.date {
+    height: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: white;
+    font-family: "Motiva Sans";
+    font-size: 14px;
+}
+
+.time {
+    height: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: white;
+    font-family: "Motiva Sans";
+    font-size: 12px;
+    text-align: center;
+}
+
+.percentage {
+    text-align: center;
+    color: white;
+    font-family: "Motiva Sans";
+    font-size: 16px;
+}
+
+.rarity {
+    text-align: center;
+    color: white;
+    font-family: "Motiva Sans";
+    font-size: 14px;
+}

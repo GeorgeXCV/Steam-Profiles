@@ -5,13 +5,9 @@
     <meta charset="UTF-8">
     <meta name="Description" content = "Track your Steam Achievements.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="steamprofiles.css">
+    <link rel="stylesheet" href="achievements.css">
 </head>
 <body>
-    <div class="header">
-    <h1>Achievements</h1>
-    </div>
-
     <div class="user-achievements">
         <table id="achievementsTable">
             <tbody>
@@ -20,9 +16,9 @@
                         <td>
                             <a href="temp">
                             <% if (game.achievements[i].achieved === true) { %>
-                            <img src="<%= achievementData.availableGameStats.achievements[i].icon %>" alt="" height="56" width="56"> 
+                            <img src="<%= achievementData.availableGameStats.achievements[i].icon %>" alt="" height="64" width="64"> 
                             <% } else { %>
-                                <img src="<%= achievementData.availableGameStats.achievements[i].icongray %>" alt="" height="56" width="56"> 
+                                <img src="<%= achievementData.availableGameStats.achievements[i].icongray %>" alt="" height="64" width="64"> 
                             <% } %>
                              </a>
                         </td>
@@ -31,17 +27,27 @@
                             <%= game.achievements[i].name %>
                             </a>
                             <br>
+                            <div class="description">
                             <%= game.achievements[i].description %>
+                            </div>
                         </td>
-                        <td>
+                        <td style="padding-left: 100px; padding-right: 20px;">
                             <% if (game.achievements[i].achieved === true) { %>
-                            <%= moment.unix(game.achievements[i].unlockTime).format('llll') %>
+                            <div class="date">
+                            <%= moment.unix(game.achievements[i].unlockTime).format('ddd, Do MMM YYYY') %>
+                            </div>
+                            <div class="time">
+                            <%= moment.unix(game.achievements[i].unlockTime).format('HH:mm:ss A') %>
+                            </div>
                             <% } %>
                         </td>
                         <td>
+                            <div class="percentage">
                             <%= achievementData.availableGameStats.achievements[i].percentage %>
-                            <br>
+                            </div>
+                            <div class="rarity">
                             <%= achievementData.availableGameStats.achievements[i].rarity %>
+                            </div>
                         </td>
                     </tr>
                     <% } %>
