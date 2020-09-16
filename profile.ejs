@@ -15,7 +15,7 @@
                 <% for(var i=0; i<gamedata.length; i++) {%>
                 <tr>
                     <td>
-                        <a href="/achievements?=<%= gamedata[i].gameName %>">
+                        <a href="/achievements?id=<%=[i]%>&app=<%=gamedata[i].appID%>">
                         <img src="<%= gamedata[i].logo %>" alt="" height="72" width="184"> 
                          </a>
                     </td>
