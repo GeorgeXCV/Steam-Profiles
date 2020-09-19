@@ -5,8 +5,8 @@
   "private": true,
   "main": "index.html",
   "scripts": {
-    "build": "browserify steamprofiles.js -o dist/bundle.js",
-    "watch": "watchify steamprofiles.js -o dist/bundle.js -v"
+    "start": "node steamapi",
+    "devstart": "nodemon steamapi"
   },
   "repository": {
     "type": "git",
@@ -32,5 +32,7 @@
     "moment": "^2.27.0",
     "steamapi": "^2.1.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
