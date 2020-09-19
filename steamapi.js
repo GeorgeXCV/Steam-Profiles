@@ -28,6 +28,10 @@ function runAsyncWrapper (callback) {
   }
 }
 
+app.use("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+ });
+
 app.post('/getuserid', runAsyncWrapper(async(req, res) => {
   const userID = await getSteamUserID(req.body.steamid);
   const games = await getOwnedGames(userID);
