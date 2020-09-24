@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.html",
   "scripts": {
-    "start": "start http://localhost:8080 & node steamapi",
+    "start": "start http://localhost:8080 & node steamapi & node database",
     "devstart": "start http://localhost:8080 & nodemon steamapi"
   },
   "repository": {
@@ -30,6 +30,8 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "moment": "^2.27.0",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.6",
     "steamapi": "^2.1.1"
   },
   "devDependencies": {

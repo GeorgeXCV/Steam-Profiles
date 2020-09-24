@@ -4,6 +4,7 @@ const moment = require('moment');
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
+const database = require('./database');
 
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static(__dirname));
@@ -66,7 +67,19 @@ app.get('/achievements', runAsyncWrapper(async(req, res) => {
 
 async function getSteamUserID(url) {
     try {
+        const trimURL = url.split("/");
+        const username = trimURL[trimURL.length-2];
+        // Search Database for username
+        // If username found, return User ID
+        // Else run code below
         const userID = await steam.resolve(url);
+        if (userID) {
+          database.SteamProfile.create({steamUsername: username, steamUserID: userID}, function (err, profile) {
+            if (err) {
+              throw 'Failed to save to database: ' + err
+            }
+          })
+        }
         return userID;
     } catch (error) {
         console.log("Failed to get Steam User ID. Error: " + error);
