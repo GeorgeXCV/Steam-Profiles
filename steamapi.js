@@ -16,11 +16,11 @@ app.set('views', __dirname);
 
 const port = 8080;
 
+let profile;
+
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
 });
-
-let supportedGames;
 
 function runAsyncWrapper (callback) {
   return function (req, res, next) {
@@ -28,24 +28,6 @@ function runAsyncWrapper (callback) {
       .catch(next)
   }
 }
-
-app.get('/:username', runAsyncWrapper(async(req, res) => {
-    const username = req.params.username
-    await database.SteamProfile.findOne({steamUsername: username}, async function (error, profile) {
-      if (!error) {
-         res.render('profile.ejs', {gamedata: profile.Games})
-      } else { // TO-DO: Else render error page
-        console.log("Failed to get user. Error: " + error);
-      } 
-    })
-}))
-
-app.post('/getuser', runAsyncWrapper(async(req, res) => {
-  const userID = await getSteamUserID(req.body.steamid);
-  const games = await getOwnedGames(userID);
-  const profile = await getOwendGamesWithAchievementSupport(games, userID);
-  res.redirect(`${profile.steamUsername}`)
-}))
 
 app.get('/achievements', runAsyncWrapper(async(req, res) => { 
   const index = req.query.id
@@ -71,10 +53,29 @@ app.get('/achievements', runAsyncWrapper(async(req, res) => {
   }
 
   res.render('achievements.ejs', {
-    game: supportedGames[index],
+    game: profile.Games[index],
     achievementData: achievements
   });
  }));
+
+app.get('/:username', runAsyncWrapper(async(req, res) => {
+    const username = req.params.username
+    await database.SteamProfile.findOne({steamUsername: username}, async function (error, user) {
+      if (!error) {
+         profile = user;
+         res.render('profile.ejs', {gamedata: user.Games})
+      } else { // TO-DO: Else render error page
+        console.log("Failed to get user. Error: " + error);
+      } 
+    })
+}))
+
+app.post('/getuser', runAsyncWrapper(async(req, res) => {
+  const userID = await getSteamUserID(req.body.steamid);
+  const games = await getOwnedGames(userID);
+  profile = await getOwendGamesWithAchievementSupport(games, userID);
+  res.redirect(`${profile.steamUsername}`)
+}))
 
 async function getSteamUserID(url) {
     try {
