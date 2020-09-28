@@ -15,7 +15,10 @@ db.once('open', function() {
 
     const SteamProfileSchema = new mongoose.Schema({
         steamUsername: String,
-        steamUserID: String
+        steamUserID: String,
+        Games: {
+
+        }
     })
     
     module.exports.SteamProfile = mongoose.model('SteamProfile', SteamProfileSchema);
