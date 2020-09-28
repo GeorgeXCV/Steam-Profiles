@@ -35,16 +35,16 @@ app.get('/:username', runAsyncWrapper(async(req, res) => {
       if (!error) {
          res.render('profile.ejs', {gamedata: profile.Games})
       } else { // TO-DO: Else render error page
-        console.log("Failed to get user.");
+        console.log("Failed to get user. Error: " + error);
       } 
     })
 }))
 
-app.post('/getuserid', runAsyncWrapper(async(req, res) => {
+app.post('/getuser', runAsyncWrapper(async(req, res) => {
   const userID = await getSteamUserID(req.body.steamid);
   const games = await getOwnedGames(userID);
-  supportedGames = await getOwendGamesWithAchievementSupport(games, userID);
-  res.render('profile.ejs', {gamedata: supportedGames})
+  const profile = await getOwendGamesWithAchievementSupport(games, userID);
+  res.redirect(`${profile.steamUsername}`)
 }))
 
 app.get('/achievements', runAsyncWrapper(async(req, res) => { 
@@ -145,8 +145,8 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
         const filter = { steamUserID: userID };
         const update = { Games: achievements };
 
-        await database.SteamProfile.findOneAndUpdate(filter, update);
-        return achievements;
+        const profile = await database.SteamProfile.findOneAndUpdate(filter, update);
+        return profile;
     } catch (error) {
       console.log("Failed to get supported games. Error: " + error);
     }
