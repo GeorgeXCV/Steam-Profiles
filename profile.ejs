@@ -15,12 +15,12 @@
                 <% for(var i=0; i<gamedata.length; i++) {%>
                 <tr>
                     <td>
-                        <a href="/achievements?id=<%=[i]%>&app=<%=gamedata[i].appID%>">
+                        <a href="/<%=username%>/achievements?id=<%=[i]%>&app=<%=gamedata[i].appID%>">
                         <img src="<%= gamedata[i].logo %>" alt="" height="72" width="184"> 
                          </a>
                     </td>
                     <td>
-                        <a class="game" href="/achievements?id=<%=[i]%>&app=<%=gamedata[i].appID%>">
+                        <a class="game" href="/<%=username%>/achievements/<%=gamedata[i].gameName.replace(/\s+/g, '-').replace(/\:/g, '').toLowerCase();%>/<%=gamedata[i].appID%>">
                         <%= gamedata[i].gameName %>
                         </a>
                         <div class="progress">

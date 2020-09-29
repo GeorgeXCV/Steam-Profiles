@@ -29,10 +29,11 @@ function runAsyncWrapper (callback) {
   }
 }
 
-app.get('/achievements', runAsyncWrapper(async(req, res) => { 
-  const index = req.query.id
-  const appID = req.query.app
-
+app.get('/:username/achievements/:game/:appID', runAsyncWrapper(async(req, res) => { 
+ 
+  const appID = req.params.appID  
+  const index = profile.Games.findIndex(game => game.appID == appID);
+  
   const achievements = await getGameAchievements(appID)
   const globalStats = await getGlobalAchievementsStats(appID);
 
@@ -63,7 +64,7 @@ app.get('/:username', runAsyncWrapper(async(req, res) => {
     await database.SteamProfile.findOne({steamUsername: username}, async function (error, user) {
       if (!error) {
          profile = user;
-         res.render('profile.ejs', {gamedata: user.Games})
+         res.render('profile.ejs', {gamedata: user.Games, username: user.steamUsername})
       } else { // TO-DO: Else render error page
         console.log("Failed to get user. Error: " + error);
       } 
