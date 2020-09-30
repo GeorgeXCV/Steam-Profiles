@@ -19,6 +19,10 @@ h2 {
   width: 300px;
 }
 
+#steamid:focus:invalid {
+  border: 2px red;
+}
+
 #submit {
   background: slategray;
   border: none;

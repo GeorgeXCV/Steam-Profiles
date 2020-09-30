@@ -17,7 +17,7 @@
 
     <div class="user-search">
         <form action="http://localhost:8080/getuser" method="POST">
-        <input id="steamid" placeholder="https://steamcommunity.com/id/yourid/" name="steamid", type="text"/>
+        <input id="steamid" placeholder="https://steamcommunity.com/id/yourid/" name="steamid", type="text" required minlength="2"/>
         <div class="button">
             <button id="submit" type="submit" class="search button">Update User</button>
         </form>    
