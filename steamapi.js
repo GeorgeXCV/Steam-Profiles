@@ -72,7 +72,16 @@ app.get('/:username', runAsyncWrapper(async(req, res) => {
 }))
 
 app.post('/getuser', runAsyncWrapper(async(req, res) => {
-  const userID = await getSteamUserID(req.body.steamid);
+  let userID;
+  const userRequest = req.body.steamid
+  const requestURL = "https://steamcommunity.com/id/"
+
+  if (userRequest.includes("://steamcommunity.com/id/")) { // If steam profile url entered, make request
+    userID = await getSteamUserID(userRequest);
+  } else { // Otherwise, append username to steam url and make request,
+    userID = await getSteamUserID(requestURL + userRequest + "/");
+  }
+
   const games = await getOwnedGames(userID);
   profile = await getOwendGamesWithAchievementSupport(games, userID);
   res.redirect(`${profile.steamUsername}`)
