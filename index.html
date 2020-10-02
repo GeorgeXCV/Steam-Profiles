@@ -30,7 +30,13 @@
                         $("#error").text("Steam User ID not found");
                     }
                 });
-        }); 
+                // Prefill update user input if user wasn't found
+                let searchParams = new URLSearchParams(window.location.search)
+                if(searchParams.has('steamid')) {
+                    let param = searchParams.get('steamid')
+                    document.getElementById('steamid').value = param;
+                }
+                }); 
     </script> 
 </head>
 

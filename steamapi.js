@@ -62,11 +62,11 @@ app.get('/:username/achievements/:game/:appID', runAsyncWrapper(async(req, res) 
 app.get('/:username', runAsyncWrapper(async(req, res) => {
     const username = req.params.username
     await database.SteamProfile.findOne({steamUsername: username}, async function (error, user) {
-      if (!error) {
+      if (user) {
          profile = user;
          res.render('profile.ejs', {gamedata: user.Games, username: user.steamUsername})
       } else { // TO-DO: Else render error page
-        console.log("Failed to get user. Error: " + error);
+        return res.redirect('/?steamid=' + username);
       } 
     })
 }))
