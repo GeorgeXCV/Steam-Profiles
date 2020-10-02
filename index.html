@@ -6,6 +6,26 @@
     <meta name="Description" content = "Track your Steam Achievements.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="steamprofiles.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
+
+    <script> 
+        $(document).ready(function() { 
+            $('#getuser')
+                .ajaxForm({
+                    url : '/getuser',
+                    dataType : 'json',
+                    success : function (response) {
+                        if (response.result == 'redirect') {
+                        window.location.href = response.url;
+                        }
+                    },
+                    error: function() {
+                        $("#error").text("Steam User ID not found");
+                    }
+                });
+        }); 
+    </script> 
 </head>
 
 <body>
@@ -16,7 +36,8 @@
 
 
     <div class="user-search">
-        <form action="http://localhost:8080/getuser" method="POST">
+        <span id="error" name="error" class="error" ></span>
+        <form id="getuser" action="http://localhost:8080/getuser" method="POST">
         <input id="steamid" placeholder="https://steamcommunity.com/id/yourid/" name="steamid", type="text" required minlength="2"> 
         <div class="button">
             <button id="submit" type="submit" class="search button">Update User</button>

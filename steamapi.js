@@ -82,9 +82,14 @@ app.post('/getuser', runAsyncWrapper(async(req, res) => {
     userID = await getSteamUserID(requestURL + userRequest + "/");
   }
 
-  const games = await getOwnedGames(userID);
-  profile = await getOwendGamesWithAchievementSupport(games, userID);
-  res.redirect(`${profile.steamUsername}`)
+  if (userID) {
+    const games = await getOwnedGames(userID);
+    profile = await getOwendGamesWithAchievementSupport(games, userID);
+    return res.status(200).send({result: 'redirect', url: `${profile.steamUsername}`})
+    // res.redirect(`${profile.steamUsername}`)
+  } else {
+    return res.status(401).send({error: "Failed to get user."})
+  }
 }))
 
 async function getSteamUserID(url) {
