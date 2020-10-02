@@ -15,10 +15,16 @@
                 .ajaxForm({
                     url : '/getuser',
                     dataType : 'json',
+                    beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
+                        $('#loader').removeClass('hidden')
+                    },
                     success : function (response) {
                         if (response.result == 'redirect') {
                         window.location.href = response.url;
                         }
+                    },
+                    complete: function () { // Set our complete callback, adding the .hidden class and hiding the spinner.
+                        $('#loader').addClass('hidden')
                     },
                     error: function() {
                         $("#error").text("Steam User ID not found");
@@ -39,6 +45,7 @@
         <span id="error" name="error" class="error" ></span>
         <form id="getuser" action="http://localhost:8080/getuser" method="POST">
         <input id="steamid" placeholder="https://steamcommunity.com/id/yourid/" name="steamid", type="text" required minlength="2"> 
+        <div id="loader" class="lds-dual-ring hidden overlay"></div>
         <div class="button">
             <button id="submit" type="submit" class="search button">Update User</button>
         </form>    
