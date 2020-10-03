@@ -9,28 +9,36 @@
 </head>
 
 <body>
+    <div class="user-header">
+        <div class="avatar">
+            <img src="<%= profile.avatar %>" alt="" height="70" width="70"> 
+        </div>
+        <div class="username">
+            <span><%= profile.nickname %></span>
+        </div>
+    </div>
     <div class="user-games">
         <table id="gamesTable">
             <tbody>
-                <% for(var i=0; i<gamedata.length; i++) {%>
+                <% for(var i=0; i<profile.Games.length; i++) {%>
                 <tr>
                     <td>
-                        <a href="/<%=username%>/achievements?id=<%=[i]%>&app=<%=gamedata[i].appID%>">
-                        <img src="<%= gamedata[i].logo %>" alt="" height="72" width="184"> 
+                        <a href="/<%=profile.username%>/achievements/<%=profile.Games[i].gameName.replace(/\s+/g, '-').replace(/\:/g, '').toLowerCase();%>/<%=profile.Games[i].appID%>">
+                        <img src="<%= profile.Games[i].logo %>" alt="" height="72" width="184"> 
                          </a>
                     </td>
                     <td>
-                        <a class="game" href="/<%=username%>/achievements/<%=gamedata[i].gameName.replace(/\s+/g, '-').replace(/\:/g, '').toLowerCase();%>/<%=gamedata[i].appID%>">
-                        <%= gamedata[i].gameName %>
+                        <a class="game" href="/<%=profile.username%>/achievements/<%=profile.Games[i].gameName.replace(/\s+/g, '-').replace(/\:/g, '').toLowerCase();%>/<%=profile.Games[i].appID%>">
+                        <%= profile.Games[i].gameName %>
                         </a>
                         <div class="progress">
-                            <%= gamedata[i].progress %>
+                            <%= profile.Games[i].progress %>
                         </div>
                     </td>
                     <td>
                         <div class="progress-bar">
-                            <span><%= gamedata[i].progressPercentage %></span>
-                            <div class="bar" style="width: <%= gamedata[i].progressPercentage %>"></div>
+                            <span><%= profile.Games[i].progressPercentage %></span>
+                            <div class="bar" style="width: <%= profile.Games[i].progressPercentage %>"></div>
                         </div>
                     </td>
                 </tr>

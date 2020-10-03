@@ -16,6 +16,8 @@ db.once('open', function() {
     const SteamProfileSchema = new mongoose.Schema({
         steamUsername: String,
         steamUserID: String,
+        nickname: String,
+        avatar: String,
         Games: {
 
         }

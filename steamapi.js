@@ -64,7 +64,7 @@ app.get('/:username', runAsyncWrapper(async(req, res) => {
     await database.SteamProfile.findOne({steamUsername: username}, async function (error, user) {
       if (user) {
          profile = user;
-         res.render('profile.ejs', {gamedata: user.Games, username: user.steamUsername})
+         res.render('profile.ejs', {profile: user})
       } else { // TO-DO: Else render error page
         return res.redirect('/?steamid=' + username);
       } 
@@ -83,6 +83,7 @@ app.post('/getuser', runAsyncWrapper(async(req, res) => {
   }
 
   if (userID) {
+    await getUserSummary(userID);
     const games = await getOwnedGames(userID);
     profile = await getOwendGamesWithAchievementSupport(games, userID);
     return res.status(200).send({result: 'redirect', url: `${profile.steamUsername}`})
@@ -97,17 +98,18 @@ async function getSteamUserID(url) {
         const trimURL = url.split("/");
         const username = trimURL[trimURL.length-2];
         let userID;
+        let newEntry = false;
         // Search Database for username
         await database.SteamProfile.findOne({steamUsername: username}, async function (error, profile) {
           if (!error) {
              userID = profile.steamUserID; // If username found, return User ID
+          } else {
+            userID = await steam.resolve(url); // If not in Database, make API request 
+            newEntry = true
           }
         })
-        // If not in Database, make API request 
-        if (!userID) {
-        userID = await steam.resolve(url);
-        }
-        if (userID) { // Then save User ID if got response
+        
+        if (newEntry) { // Then save User ID if got response
           await database.SteamProfile.create({steamUsername: username, steamUserID: userID}, async function (err, profile) {
             if (err) {
               throw 'Failed to save to database: ' + err
@@ -119,6 +121,19 @@ async function getSteamUserID(url) {
     } catch (error) {
         console.log("Failed to get Steam User ID. Error: " + error);
     }
+}
+
+async function getUserSummary (userID) {
+  try {
+      const profile = await steam.getUserSummary(userID);
+      if (profile) {
+        const filter = { steamUserID: userID };
+        const update = { nickname: profile.nickname, avatar: profile.avatar.medium};
+        await database.SteamProfile.findOneAndUpdate(filter, update);
+      }
+  } catch (error) {
+    console.log("Failed to get User Summary. Error: " + error);
+  }
 }
 
 async function getOwnedGames(userID) {
@@ -199,74 +214,3 @@ async function getUserGameAchievements(userID, appID) {
       // console.log("Failed to get user achievements. Error: " + error)
   }
 }
-// https://steamcommunity.com/id/georgea95/
-
-// PlayerAchievements {
-//   steamID: '76561198001183532',        
-//   gameName: "Assassin's Creed Origins",
-//   achievements: [
-//     Achievement {
-//       api: '001',
-//       name: 'First Steps',
-//       description: '',
-//       achieved: true,
-//       unlockTime: 1553361663
-//     },
-//     Achievement {
-//       api: '002',
-//       name: "I'm Just Getting Started",
-//       description: '',
-//       achieved: true,
-//       unlockTime: 1553372496
-//     },
-//     Achievement {
-//       api: '060',
-//       name: 'Archeologist',
-//       description: 'Complete all tours in the Daily Life category',
-//       achieved: false,
-//       unlockTime: 0
-//     },
-
-
-// Get Schema 
-// "achievements": [
-//   {
-//       "name": "TF_PLAY_GAME_EVERYCLASS",
-//       "defaultvalue": 0,
-//       "displayName": "Head of the Class",
-//       "hidden": 0,
-//       "description": "Play a complete round with every class.",
-//       "icon": "http://media.steampowered.com/steamcommunity/public/images/apps/440/tf_play_game_everyclass.jpg",
-//       "icongray": "http://media.steampowered.com/steamcommunity/public/images/apps/440/tf_play_game_everyclass_bw.jpg"
-//   },
-
-// Get Owned Games
-// [
-//   Game {
-//     name: 'Half-Life',
-//     appID: 70,
-//     playTime: 17,
-//     playTime2: 0,
-//     logoURL: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/70/6bd76ff700a8c7a5460fbae3cf60cb930279897d.jpg', 
-//     iconURL: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/70/95be6d131fc61f145797317ca437c9765f24b41c.jpg'  
-//   },
-//   Game {
-//     name: 'Counter-Strike: Source',
-//     appID: 240,
-//     playTime: 1146,
-//     playTime2: 0,
-//     logoURL: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/240/ee97d0dbf3e5d5d59e69dc20b98ed9dc8cad5283.jpg',
-//     iconURL: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/240/9052fa60c496a1c03383b27687ec50f4bf0f0e10.jpg' 
-//   },
-
-
-// async function getSteamUserSummary(userID) {
-//   try {
-//       const test = await steam.getUserSummary(userID);
-//       console.log(test);
-//   } catch (error) {
-//       console.log("Failed to get Steam User Summary. Error: " + error);
-//   }
-// }
-
-// getSteamUserSummary("76561198001183532");
