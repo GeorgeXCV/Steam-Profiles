@@ -103,17 +103,17 @@ async function getSteamUserID(url) {
              userID = profile.steamUserID; // If username found, return User ID
           }
         })
-        // If not in Database, make API request and store User
+        // If not in Database, make API request 
         if (!userID) {
         userID = await steam.resolve(url);
-        if (userID) {
+        }
+        if (userID) { // Then save User ID if got response
           await database.SteamProfile.create({steamUsername: username, steamUserID: userID}, async function (err, profile) {
             if (err) {
               throw 'Failed to save to database: ' + err
             }
             userID = profile.steamUserID
           })
-        }
       }
     return userID;
     } catch (error) {
