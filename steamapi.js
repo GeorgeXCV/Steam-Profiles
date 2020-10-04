@@ -153,6 +153,12 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
           if (gameAchievements) {
                   gameAchievements.appID = game.appID  // Copy App ID because needed for request to get game achievement images
                   gameAchievements.logo = game.logoURL // Add image from game object to achievement object
+                  const playTime = game.playTime // Copy Playtime from game object to achievement object
+                  if (playTime > 0) {
+                    const hours = Math.floor(playTime / 60);          
+                    // const minutes = playTime % 60;
+                    gameAchievements.playTime = `${hours} hrs on record`
+                  }       
 
                   // Loop through achievements and add string to object which shows user progress
                   let achieved = 0;
