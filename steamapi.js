@@ -149,6 +149,7 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
     try { 
         let achievements = [];
         let completedGames = 0;
+        let totalAchievements = 0;
         await Promise.all(games.map(async (game) => {
           const gameAchievements = await getUserGameAchievements(userID, game.appID);
           if (gameAchievements) {
@@ -166,6 +167,7 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
                   for(var i = 0; i < gameAchievements.achievements.length; i++) {
                       if (gameAchievements.achievements[i].achieved == true) {
                         achieved++
+                        totalAchievements++
                       }
                   }
                   if (achieved == gameAchievements.achievements.length) {
@@ -182,7 +184,7 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
         }))
 
         const filter = { steamUserID: userID };
-        const update = { completedGames: completedGames, Games: achievements };
+        const update = { completedGames: completedGames, totalAchievements: totalAchievements, Games: achievements };
 
         const profile = await database.SteamProfile.findOneAndUpdate(filter, update);
         return profile;
