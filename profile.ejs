@@ -16,6 +16,10 @@
         <div class="username">
             <span><%= profile.nickname %></span>
         </div>
+        <div class="stats">
+            <span>Games: <%= profile.Games.length %></span>
+            <span>100% Games: <%= profile.completedGames %></span>
+        </div>
     </div>
     <div class="user-games">
         <table id="gamesTable">
@@ -34,8 +38,9 @@
                         <div class="progress">
                             <%= profile.Games[i].progress %>
                         </div>
-                        <div class="playtime"></div> 
+                        <div class="playtime">
                             <%= profile.Games[i].playTime %>
+                        </div> 
                     </td>
                     <td>
                         <div class="progress-bar">

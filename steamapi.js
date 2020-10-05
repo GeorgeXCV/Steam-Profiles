@@ -148,18 +148,19 @@ async function getOwnedGames(userID) {
 async function getOwendGamesWithAchievementSupport(games, userID) {
     try { 
         let achievements = [];
+        let completedGames = 0;
         await Promise.all(games.map(async (game) => {
           const gameAchievements = await getUserGameAchievements(userID, game.appID);
           if (gameAchievements) {
                   gameAchievements.appID = game.appID  // Copy App ID because needed for request to get game achievement images
-                  gameAchievements.logo = game.logoURL // Add image from game object to achievement object
+                  gameAchievements.logo = game.logoURL // Add image from game object to achievement object      
                   const playTime = game.playTime // Copy Playtime from game object to achievement object
                   if (playTime > 0) {
                     const hours = Math.floor(playTime / 60);          
                     // const minutes = playTime % 60;
                     gameAchievements.playTime = `${hours} hrs on record`
                   }       
-
+                
                   // Loop through achievements and add string to object which shows user progress
                   let achieved = 0;
                   for(var i = 0; i < gameAchievements.achievements.length; i++) {
@@ -170,6 +171,7 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
                   if (achieved == gameAchievements.achievements.length) {
                     gameAchievements.progress = `All ${achieved} Achievements`
                     gameAchievements.progressPercentage = "100%"; 
+                    completedGames++
                   } else {
                     gameAchievements.progress = `${achieved} of ${gameAchievements.achievements.length} Achievements` 
                     gameAchievements.progressPercentage = Math.round((achieved / gameAchievements.achievements.length) * 100).toString() + "%";                  
@@ -180,7 +182,7 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
         }))
 
         const filter = { steamUserID: userID };
-        const update = { Games: achievements };
+        const update = { completedGames: completedGames, Games: achievements };
 
         const profile = await database.SteamProfile.findOneAndUpdate(filter, update);
         return profile;
@@ -188,7 +190,7 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
       console.log("Failed to get supported games. Error: " + error);
     }
 }
- 
+
 async function getGameAchievements(appID) {
   try {
      const achievements = await steam.getGameSchema(appID);

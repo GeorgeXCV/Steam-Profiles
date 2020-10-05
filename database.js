@@ -18,6 +18,7 @@ db.once('open', function() {
         steamUserID: String,
         nickname: String,
         avatar: String,
+        completedGames: String,
         Games: {
 
         }
