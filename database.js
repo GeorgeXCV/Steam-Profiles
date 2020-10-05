@@ -20,6 +20,8 @@ db.once('open', function() {
         avatar: String,
         completedGames: String,
         totalAchievements: String,
+        unearnedAchievements: String,
+        completion: String,
         Games: {
 
         }

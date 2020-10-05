@@ -150,6 +150,7 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
         let achievements = [];
         let completedGames = 0;
         let totalAchievements = 0;
+        let unearnedAchievements = 0;
         await Promise.all(games.map(async (game) => {
           const gameAchievements = await getUserGameAchievements(userID, game.appID);
           if (gameAchievements) {
@@ -168,6 +169,8 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
                       if (gameAchievements.achievements[i].achieved == true) {
                         achieved++
                         totalAchievements++
+                      } else {
+                        unearnedAchievements++;
                       }
                   }
                   if (achieved == gameAchievements.achievements.length) {
@@ -183,8 +186,13 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
                } 
         }))
 
+        let completion  = (totalAchievements / unearnedAchievements * 100).toFixed(2);
+        completion = `${completion}%`
+        console.log(completion);
+        // 30/40*100 = 75.
+        // So 30 is 75% of 40. 
         const filter = { steamUserID: userID };
-        const update = { completedGames: completedGames, totalAchievements: totalAchievements, Games: achievements };
+        const update = { completedGames: completedGames, totalAchievements: totalAchievements,  unearnedAchievements: unearnedAchievements, completion: completion, Games: achievements };
 
         const profile = await database.SteamProfile.findOneAndUpdate(filter, update);
         return profile;
