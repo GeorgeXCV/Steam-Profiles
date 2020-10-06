@@ -188,9 +188,6 @@ async function getOwendGamesWithAchievementSupport(games, userID) {
 
         let completion  = (totalAchievements / unearnedAchievements * 100).toFixed(2);
         completion = `${completion}%`
-        console.log(completion);
-        // 30/40*100 = 75.
-        // So 30 is 75% of 40. 
         const filter = { steamUserID: userID };
         const update = { completedGames: completedGames, totalAchievements: totalAchievements,  unearnedAchievements: unearnedAchievements, completion: completion, Games: achievements };
 
