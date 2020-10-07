@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background-color: #111;
     flex-direction: column;
     justify-content: center;
     text-align: center;
@@ -12,6 +12,8 @@ body {
 
 h1 {
     color: white;
+    font-size: 35px;
+    font-weight: 800;
   }
 
 h2 {
@@ -32,6 +34,8 @@ h2 {
   height: 30px;
   width: 350px;
   text-align: center;
+  border-radius:5px;
+  border-color: white;
 }
 
 #steamid:focus:invalid {
@@ -39,18 +43,22 @@ h2 {
 }
 
 #submit {
-  background: slategray;
-  border: none;
+  background: #4CAF50;
+  border-radius:5px;
+  border-color: green;
   color: white;
+  font-family: 'Roboto';
   font-weight: 500;
-  font-size: 15;
+  font-size: 1.2rem;
   line-height: 1.9rem;
   text-align: center;
-  width: 130px;
+  width: 140px;
 }
 
 footer {
+  font-family: 'Roboto';
   font-size: 13px;
+  font-weight: 400;
   line-height: 1.6rem;
 }
 
@@ -77,7 +85,7 @@ footer a {
 bullet {
   padding: 0 1px;
   font-size: 1.7rem;
-  vertical-align: -2px;
+  vertical-align: -5px;
   line-height: 0;
   color: #a2a4a5;
 }
