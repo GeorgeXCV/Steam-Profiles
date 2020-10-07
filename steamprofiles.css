@@ -12,7 +12,6 @@ body {
 
 h1 {
     color: white;
-    /* margin-left: 20px; */
   }
 
 h2 {
@@ -21,6 +20,66 @@ h2 {
 
 .user-search {
   position: relative;
+}
+
+#error {
+  color: red;
+  font-size: 15;
+  font-weight: 800;
+}
+
+#steamid {
+  height: 30px;
+  width: 350px;
+  text-align: center;
+}
+
+#steamid:focus:invalid {
+  border: 2px red;
+}
+
+#submit {
+  background: slategray;
+  border: none;
+  color: white;
+  font-weight: 500;
+  font-size: 15;
+  line-height: 1.9rem;
+  text-align: center;
+  width: 130px;
+}
+
+footer {
+  font-size: 13px;
+  line-height: 1.6rem;
+}
+
+footer a {
+  color:white;
+}
+
+.disclaimer {
+  color: white;
+  line-height: 16px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-align: left;
+}
+
+.links {
+  color: white;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+bullet {
+  padding: 0 1px;
+  font-size: 1.7rem;
+  vertical-align: -2px;
+  line-height: 0;
+  color: #a2a4a5;
 }
 
 /*Spinner Styles*/
@@ -68,74 +127,4 @@ h2 {
     z-index: 999;
     opacity: 1;
     transition: all 0.5s;
-}
-
-
-
-#error {
-  color: red;
-  font-size: 15;
-  font-weight: 800;
-}
-
-#steamid {
-  height: 30px;
-  width: 300px;
-}
-
-#steamid:focus:invalid {
-  border: 2px red;
-}
-
-#submit {
-  background: slategray;
-  border: none;
-  color: white;
-  font-weight: 500;
-  font-size: 15;
-  line-height: 1.9rem;
-  text-align: center;
-  width: 130px;
-}
-
-td a {
-    width: 100%;
-    display: block;
-  }
-
-a {
-    text-decoration: none;
-}
-
-footer {
-  font-size: 13px;
-  line-height: 1.6rem;
-}
-
-footer a {
-  color:white;
-}
-
-.disclaimer {
-  color: white;
-  line-height: 16px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  text-align: left;
-}
-
-.links {
-  color: white;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-}
-
-bullet {
-  padding: 0 1px;
-  font-size: 1.7rem;
-  vertical-align: -2px;
-  line-height: 0;
-  color: #a2a4a5;
 }
