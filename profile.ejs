@@ -9,12 +9,13 @@
 </head>
 
 <body>
+    <div class="header">
+        <h1>Steam Profiles</h1>
+    </div>
     <div class="user-header">
-        <div class="avatar">
+        <div class="user">
             <img src="<%= profile.avatar %>" alt="" height="70" width="70"> 
-        </div>
-        <div class="username">
-            <span><%= profile.nickname %></span>
+            <span><%= profile.nickname %>'s Steam Profile</span>
         </div>
         <div class="stats">
             <span>Games: <%= profile.Games.length %></span>
