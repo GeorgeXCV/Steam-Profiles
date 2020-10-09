@@ -91,7 +91,7 @@ h1 {
 .progress-bar {
     height: 20px;
     width: 126px;
-    background: #BABABA;
+    background: #444;
     position: relative;
 }
 
@@ -109,7 +109,7 @@ h1 {
 
 .progress-bar div.bar {
     height: 20px;
-    background: #336291;
+    background: #4CAF50;
     position: absolute;
     top: 0;
     left: 0;
