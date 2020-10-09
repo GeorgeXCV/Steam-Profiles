@@ -20,12 +20,21 @@
             <span><%= profile.nickname %>'s Steam Profile</span>
         </div>
         <div class="stats">
-            <span>Games: <%= profile.Games.length %></span>
-            <span>100% Games: <%= profile.completedGames %></span>
-            <span>Total Achievements: <%= profile.totalAchievements %></span>
-            <span>Completion: <%= profile.completion %></span>
-            <span>Unearned Achievements: <%= profile.unearnedAchievements %></span>
-
+            <span class="stat"> <%= profile.Games.length %>
+                <span>Games</span>
+            </span>
+            <span class="stat"> <%= profile.completedGames %> 
+                <span>100% Games</span>
+            </span>
+            <span class="stat"> <%= profile.totalAchievements %>
+                <span>Total Achievements</span>
+            </span>
+            <span class="stat"> <%= profile.completion %>
+                <span>Completion</span>
+            </span>
+            <span class="stat"> <%= profile.unearnedAchievements %>
+                <span>Unearned Achievements</span>
+            </span>
         </div>
     </div>
     <div class="user-games">
