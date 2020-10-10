@@ -13,6 +13,7 @@ a {
 h1 {
     color: white;
     font-size: 35px;
+    font-family: "Roboto";
     font-weight: 800;
     position:relative;    
     left: 0;
@@ -28,7 +29,8 @@ h1 {
 
 .username {
     color: white;
-    font-size: 23px;
+    font-size: 30px;
+    font-family: "Roboto";
     font-weight: 800;
     display: inline-block;
     padding-bottom: 10px;
@@ -37,6 +39,7 @@ h1 {
 .stats {
     font-size: 16px;
     font-weight: 600;
+    font-family: "Roboto";
     display: flex;
     box-sizing: border-box;
     bottom: 50px;
@@ -54,6 +57,7 @@ h1 {
     text-align: center;
     -webkit-box-flex: 1;
     padding-right: 50px;
+    font-family: "Roboto";
 }
 
 .stat span {
@@ -63,6 +67,7 @@ h1 {
     text-align: center;
     /* text-transform: uppercase; */
     font-weight: 600;
+    font-family: "Roboto";
 }
 
 .user-games {
@@ -70,9 +75,9 @@ h1 {
 }
 
 .game {
-    color: white;
+    color: #77c3ec;
     font-size: 20px;
-    font-family: "Motiva Sans";
+    font-family: "Roboto";
     font-weight: 900; 
     text-align: left;
 }
@@ -81,11 +86,17 @@ h1 {
     height: 15px;
     padding-top: 2px;
     padding-bottom: 2px;
-    color: #56707f;
-    font-family: "Motiva Sans";
+    color: white;
+    font-family: "Roboto";
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     text-align: left;
+}
+
+.playtime {
+    color: #56707f;
+    font-family: "Roboto";
+    font-size: 16px;
 }
 
 .progress-bar {
@@ -97,6 +108,7 @@ h1 {
 
 .progress-bar span {
     color: #f9f9f9;
+    font-family: "Roboto";
     font-size: 1.1rem;
     font-weight: 600;
     line-height: 15px;
