@@ -43,12 +43,12 @@
                 <% for(var i=0; i<profile.Games.length; i++) {%>
                 <tr>
                     <td>
-                        <a href="/<%=profile.username%>/achievements/<%=profile.Games[i].gameName.replace(/\s+/g, '-').replace(/\:/g, '').toLowerCase();%>/<%=profile.Games[i].appID%>">
+                        <a href="/<%=profile.steamUsername%>/achievements/<%=profile.Games[i].gameName.replace(/\s+/g, '-').replace(/\:/g, '').toLowerCase();%>/<%=profile.Games[i].appID%>">
                         <img src="<%= profile.Games[i].logo %>" alt="" height="72" width="184"> 
                          </a>
                     </td>
                     <td>
-                        <a class="game" href="/<%=profile.username%>/achievements/<%=profile.Games[i].gameName.replace(/\s+/g, '-').replace(/\:/g, '').toLowerCase();%>/<%=profile.Games[i].appID%>">
+                        <a class="game" href="/<%=profile.steamUsername%>/achievements/<%=profile.Games[i].gameName.replace(/\s+/g, '-').replace(/\:/g, '').toLowerCase();%>/<%=profile.Games[i].appID%>">
                         <%= profile.Games[i].gameName %>
                         </a>
                         <div class="progress">
