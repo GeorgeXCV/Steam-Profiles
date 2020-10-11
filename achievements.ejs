@@ -39,19 +39,18 @@
             </div>
         </div>
 
-    <div class="user-achievements">
         <table class="achievements-table">
             <tbody>
                 <% for(var i=0; i<game.achievements.length; i++) {%>
-                    <tr class="achievement">
-                        <td>
+                    <tr class="achievement-row">
+                        <td class="achievement-image">
                             <% if (game.achievements[i].achieved === true) { %>
                             <img src="<%= achievementData.availableGameStats.achievements[i].icon %>" alt="" height="64" width="64"> 
                             <% } else { %>
                                 <img src="<%= achievementData.availableGameStats.achievements[i].icongray %>" alt="" height="64" width="64"> 
                             <% } %>
                         </td>
-                        <td>
+                        <td class="achievement-details">
                             <div class="name">
                             <%= game.achievements[i].name %>
                             </div>
@@ -59,7 +58,7 @@
                             <%= game.achievements[i].description %>
                             </div>
                         </td>
-                        <td style="padding-left: 100px; padding-right: 20px;">
+                        <td class="timestamp">
                             <% if (game.achievements[i].achieved === true) { %>
                             <div class="date">
                             <%= moment.unix(game.achievements[i].unlockTime).format('ddd, Do MMM YYYY') %>
@@ -69,7 +68,7 @@
                             </div>
                             <% } %>
                         </td>
-                        <td>
+                        <td class="global-stats">
                             <div class="percentage">
                             <%= achievementData.availableGameStats.achievements[i].percentage %>
                             </div>
@@ -81,6 +80,5 @@
                     <% } %>
             </tbody>
         </table>
-    </div>
 </body>
 </html>
