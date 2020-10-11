@@ -8,25 +8,53 @@
     <link rel="stylesheet" href="/achievements.css">
 </head>
 <body>
+    <div class="header">
+        <h1>Steam Profiles</h1>
+    </div>
+    <div class="user-header">
+        <div class="avatar">
+            <img src="<%= profile.avatar %>" alt="" height="90" width="90"> 
+        </div>
+        <div class="username">
+            <span><%= profile.nickname %></span>
+            <div class="title">
+                <span><%= game.gameName %></span>
+            </div>
+            <div class="progress">
+                <span><%= game.progress %></span>
+            </div>
+            <div class="playtime">
+                <span><%= game.playTime %></span>
+            </div>
+        </div>
+      </div>
+
+    <div class="game-header">
+            <div class="logo">
+                <img src="<%= game.logo %>" alt="" height="72" width="184"> 
+            </div>
+            <div class="progress-bar">
+                <span><%= game.progressPercentage %></span>
+                <div class="bar" style="width: <%= game.progressPercentage %>"></div>
+            </div>
+        </div>
+
     <div class="user-achievements">
-        <table id="achievementsTable">
+        <table class="achievements-table">
             <tbody>
                 <% for(var i=0; i<game.achievements.length; i++) {%>
                     <tr class="achievement">
                         <td>
-                            <a href="temp">
                             <% if (game.achievements[i].achieved === true) { %>
                             <img src="<%= achievementData.availableGameStats.achievements[i].icon %>" alt="" height="64" width="64"> 
                             <% } else { %>
                                 <img src="<%= achievementData.availableGameStats.achievements[i].icongray %>" alt="" height="64" width="64"> 
                             <% } %>
-                             </a>
                         </td>
                         <td>
-                            <a class="name" href="temp">
+                            <div class="name">
                             <%= game.achievements[i].name %>
-                            </a>
-                            <br>
+                            </div>
                             <div class="description">
                             <%= game.achievements[i].description %>
                             </div>
@@ -53,8 +81,6 @@
                     <% } %>
             </tbody>
         </table>
-        </div>
-        </div>
     </div>
 </body>
 </html>

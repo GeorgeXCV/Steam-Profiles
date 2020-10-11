@@ -1,16 +1,113 @@
 body {
-    background-color: black;
+    background-color: #111;
     color: white;
-  }
+    margin-left: auto;
+    margin-right: auto;
+    width: 960px;
+}
 
 a {
     text-decoration: none;
 }
 
+h1 {
+    color: white;
+    font-size: 35px;
+    font-family: "Roboto";
+    font-weight: 800;
+    position:relative;    
+    left: 0;
+}
+
+.user-header {
+    display: inline-block;
+}
+
+.avatar {
+    float: left;
+}
+
+.username {
+    color: white;
+    font-size: 25px;
+    font-family: "Roboto";
+    font-weight: 800;
+    float: left;
+    padding-left: 5px;
+    padding-bottom: 10px;
+}
+
+.title {
+    color: white;
+    font-size: 20px;
+    font-family: "Roboto";
+    font-weight: 900; 
+    text-align: left;
+}
+
+.progress {  
+    color: white;
+    font-family: "Roboto";
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+    padding-left: 2px;
+}
+
+.playtime {
+    color: #56707f;
+    font-family: "Roboto";
+    font-size: 16px;
+    padding-left: 2px;
+}
+
+.game-header {
+    display: inline-block;
+    vertical-align: top;
+    float: right;
+}
+
+.progress-bar {
+    height: 20px;
+    width: 184px;
+    background: #444;
+    position: relative;
+}
+
+.progress-bar span {
+    color: #f9f9f9;
+    font-family: "Roboto";
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 15px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.progress-bar div.bar {
+    height: 20px;
+    background: #4CAF50;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.achievement {
+    background-color: #222;
+}
+
+.achievements-table {
+    width: 100%;
+}
+
+
 .name {
     color: white;
     font-size: 20px;
-    font-family: "Motiva Sans";
+    font-family: "Roboto";
     font-weight: 900; 
     text-align: left;
 }
@@ -20,8 +117,8 @@ a {
     padding-top: 2px;
     padding-bottom: 2px;
     color: white;
-    font-family: "Motiva Sans";
-    font-size: 15px;
+    font-family: "Roboto";
+    font-size: 16px;
     text-align: left;
 }
 
@@ -30,8 +127,9 @@ a {
     padding-top: 2px;
     padding-bottom: 2px;
     color: white;
-    font-family: "Motiva Sans";
+    font-family: "Roboto";
     font-size: 14px;
+    text-align: center;
 }
 
 .time {
@@ -39,7 +137,7 @@ a {
     padding-top: 2px;
     padding-bottom: 2px;
     color: white;
-    font-family: "Motiva Sans";
+    font-family: "Roboto";
     font-size: 12px;
     text-align: center;
 }
@@ -47,13 +145,13 @@ a {
 .percentage {
     text-align: center;
     color: white;
-    font-family: "Motiva Sans";
+    font-family: "Roboto";
     font-size: 16px;
 }
 
 .rarity {
     text-align: center;
     color: white;
-    font-family: "Motiva Sans";
+    font-family: "Roboto";
     font-size: 14px;
 }

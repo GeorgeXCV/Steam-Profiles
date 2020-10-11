@@ -54,6 +54,7 @@ app.get('/:username/achievements/:game/:appID', runAsyncWrapper(async(req, res) 
   }
 
   res.render('achievements.ejs', {
+    profile: profile,
     game: profile.Games[index],
     achievementData: achievements
   });

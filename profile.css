@@ -19,10 +19,6 @@ h1 {
     left: 0;
 }
 
-.userheader {
-    position: fixed;
-}
-
 .avatar {
     display: inline-block;
 }
