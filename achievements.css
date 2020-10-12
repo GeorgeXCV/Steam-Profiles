@@ -159,3 +159,39 @@ tr > td {
     font-family: "Roboto";
     font-size: 14px;
 }
+
+footer {
+    font-family: 'Roboto';
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.6rem;
+  }
+  
+  footer a {
+    color:white;
+  }
+  
+  .disclaimer {
+    color: white;
+    line-height: 16px;
+    position: relative;
+    bottom: 0;
+    text-align: left;
+    float: left;
+  }
+  
+  .links {
+    color: white;
+    position: relative;
+    float: right;
+    padding-top: 10px;
+  }
+  
+  bullet {
+    padding: 0 1px;
+    font-size: 1.7rem;
+    vertical-align: -5px;
+    line-height: 0;
+    color: #a2a4a5;
+  }
+  
