@@ -92,10 +92,12 @@ bullet {
 
 /*Spinner Styles*/
 .lds-dual-ring {
-  position: absolute;
+  position: relative;
   display: inline-block;
   width: 80px;
   height: 80px;
+  top: 520px;
+  left: -20px;
 }
 
 .lds-dual-ring:after {
@@ -127,8 +129,8 @@ bullet {
 /*Add an overlay to the entire page blocking any further presses to buttons or other elements.*/
 .overlay {
     position: fixed;
-    top: 0;
-    left: 0;
+    /* top: 0;
+    left: 0; */
     width: 100%;
     height: 100vh;
     background: rgba(0,0,0,.8);
