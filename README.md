@@ -1,6 +1,8 @@
 # Steam-Profiles
-Steam Achievement Tracker Website
+Not a fan of the current Steam Achievement tracking websites, so I built my own (MVP), inspired by the website I like to use for PlayStation trophies.
 
-I didn't like any of the current Steam Achievement tracking websites, so I built my own (MVP), inspired by the website I like to use for PlayStation trophies.
+Powered by [Steam API](https://github.com/xDimGG/node-steamapi), [Express.js](https://github.com/expressjs/express) and [MongoDB](https://github.com/mongodb/mongo). 
 
-Powered by Express.js and MongoDB.
+![](https://i.imgur.com/gmgLTLL.png)
+
+![](https://i.imgur.com/KpJnEtR.png)
