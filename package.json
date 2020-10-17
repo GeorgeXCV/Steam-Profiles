@@ -1,6 +1,9 @@
 {
   "name": "steam-profiles",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.5.0"
+  },
   "description": "Steam Achievement Tracker",
   "private": true,
   "main": "index.html",
