@@ -6,10 +6,14 @@ const app = express()
 const bodyParser = require('body-parser');
 const database = require('./database');
 const compression = require('compression');
+const helmet = require('helmet');
 
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static(__dirname));
 app.use(compression()); //Compress all routes
+app.use(helmet({
+  contentSecurityPolicy: false, // Breaks images if true
+}));
 
 app.locals.moment = require('moment');
 
