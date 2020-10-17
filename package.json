@@ -8,7 +8,7 @@
   "private": true,
   "main": "index.html",
   "scripts": {
-    "start": "start http://localhost:8080 & node steamapi & node database",
+    "start": "node steamapi",
     "devstart": "start http://localhost:8080 & nodemon steamapi"
   },
   "repository": {
