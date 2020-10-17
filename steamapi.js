@@ -8,6 +8,8 @@ const database = require('./database');
 const compression = require('compression');
 const helmet = require('helmet');
 
+app.locals.moment = require('moment');
+
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static(__dirname));
 app.use(compression()); //Compress all routes
@@ -15,14 +17,10 @@ app.use(helmet({
   contentSecurityPolicy: false, // Breaks images if true
 }));
 
-app.locals.moment = require('moment');
-
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
 
-const port = 8080;
-
-let profile;
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
@@ -34,6 +32,12 @@ function runAsyncWrapper (callback) {
       .catch(next)
   }
 }
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
+
+let profile;
 
 app.get('/:username/achievements/:game/:appID', runAsyncWrapper(async(req, res) => { 
  
