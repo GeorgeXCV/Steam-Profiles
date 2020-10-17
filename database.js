@@ -2,7 +2,8 @@
 const mongoose = require('mongoose');
 
 //Set up default mongoose connection
-mongoose.connect('mongodb://127.0.0.1/SteamProfiles', {useNewUrlParser: true, useUnifiedTopology: true});
+const devURL = "mongodb://127.0.0.1/SteamProfiles"
+mongoose.connect(process.env.MONGODB_URL|| devURL, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //Get the default connection
 var db = mongoose.connection;
