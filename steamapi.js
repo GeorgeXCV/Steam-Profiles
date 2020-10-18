@@ -20,7 +20,7 @@ app.use(helmet({
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
@@ -98,7 +98,6 @@ app.post('/getuser', runAsyncWrapper(async(req, res) => {
     const games = await getOwnedGames(userID);
     profile = await getOwendGamesWithAchievementSupport(games, userID);
     return res.status(200).send({result: 'redirect', url: `${profile.steamUsername}`})
-    // res.redirect(`${profile.steamUsername}`)
   } else {
     return res.status(404).sendFile(__dirname + '/error.html');
   }
@@ -113,25 +112,38 @@ async function getSteamUserID(url) {
         // Search Database for username
         await database.SteamProfile.findOne({steamUsername: username}, async function (error, profile) {
           if (profile) {
-             userID = profile.steamUserID; // If username found, return User ID
+            // If username found, return User ID
+             userID = profile.steamUserID; 
           } else {
-            userID = await steam.resolve(url); // If not in Database, make API request 
-            newEntry = true
+            // If not in Database, we need to create a new entry
+            newEntry = true;
           }
         })
         
-        if (newEntry) { // Then save User ID if got response
+        if (newEntry) { 
+          userID = await resolveSteamURL(url); // Get User ID
+          // Create new User in the Database
           await database.SteamProfile.create({steamUsername: username, steamUserID: userID}, async function (err, profile) {
-            if (err) {
+            if (profile) {
+              userID = profile.steamUserID
+            } else if (err) {
               throw 'Failed to save to database: ' + err
             }
-            userID = profile.steamUserID
           })
       }
     return userID;
     } catch (error) {
         console.log("Failed to get Steam User ID. Error: " + error);
     }
+}
+
+async function resolveSteamURL(url) {
+  try {
+    const userID = await steam.resolve(url);
+    return userID;
+  } catch (error) {
+    console.log("Failed to resolve steam url. Error: " + error);
+  }
 }
 
 async function getUserSummary (userID) {
