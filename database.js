@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 //Set up default mongoose connection
-const devURL = "mongodb://127.0.0.1/SteamProfiles"
+const devURL = "mongodb://localhost:27017/SteamProfiles"
 mongoose.connect(process.env.MONGODB_URL|| devURL, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //Get the default connection

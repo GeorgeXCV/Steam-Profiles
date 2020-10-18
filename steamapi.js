@@ -112,7 +112,7 @@ async function getSteamUserID(url) {
         let newEntry = false;
         // Search Database for username
         await database.SteamProfile.findOne({steamUsername: username}, async function (error, profile) {
-          if (!error) {
+          if (profile) {
              userID = profile.steamUserID; // If username found, return User ID
           } else {
             userID = await steam.resolve(url); // If not in Database, make API request 
