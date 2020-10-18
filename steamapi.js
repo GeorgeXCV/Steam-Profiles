@@ -100,7 +100,7 @@ app.post('/getuser', runAsyncWrapper(async(req, res) => {
     return res.status(200).send({result: 'redirect', url: `${profile.steamUsername}`})
     // res.redirect(`${profile.steamUsername}`)
   } else {
-    return res.status(401).send({error: "Failed to get user."})
+    return res.status(404).sendFile(__dirname + '/error.html');
   }
 }))
 
