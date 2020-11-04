@@ -45,9 +45,9 @@
                     <tr class="achievement-row">
                         <td class="achievement-image">
                             <% if (game.achievements[i].achieved === true) { %>
-                            <img src="<%= achievementData.availableGameStats.achievements[i].icon %>" alt="" height="64" width="64"> 
+                            <img src="<%= achievementData.availableGameStats.achievements[i].icon %>" alt="" height="64" width="64" loading="lazy"> 
                             <% } else { %>
-                                <img src="<%= achievementData.availableGameStats.achievements[i].icongray %>" alt="" height="64" width="64"> 
+                                <img src="<%= achievementData.availableGameStats.achievements[i].icongray %>" alt="" height="64" width="64" loading="lazy"> 
                             <% } %>
                         </td>
                         <td class="achievement-details">
