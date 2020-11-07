@@ -101,7 +101,16 @@ h1 {
 
 .achievement-row {
     background-color: #222;
-    min-height: 66px;
+    min-height: 80px;
+}
+
+.achievement-image {
+    width: 5%;
+    padding-top: 5px;
+}
+
+.achievement-details {
+    padding-bottom: 20px;
 }
 
 tr > td {
@@ -126,6 +135,10 @@ tr > td {
     font-family: "Roboto";
     font-size: 16px;
     text-align: left;
+}
+
+.timestamp {
+    width: 15%;
 }
 
 .date {

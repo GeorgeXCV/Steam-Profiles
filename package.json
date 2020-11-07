@@ -8,8 +8,8 @@
   "private": true,
   "main": "index.html",
   "scripts": {
-    "start": "node steamapi",
-    "devstart": "start http://localhost:80 & nodemon steamapi"
+    "start": "node ./js/server",
+    "devstart": "start http://localhost:80 & nodemon ./js/server"
   },
   "repository": {
     "type": "git",

@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="Description" content = "Track your Steam Achievements using Steam Profiles.">    
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="steamprofiles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/css/steamprofiles.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
-    <script src="http://malsup.github.com/jquery.form.js"></script> 
+    <script src="/jquery/jquery.form.js"></script> 
 
     <script> 
         $(document).ready(function() { 
@@ -27,7 +31,7 @@
                         $('#loader').addClass('hidden')
                     },
                     error: function() {
-                        $("#error").text("Steam User ID not found");
+                        $("#error").text("Check Profile Privacy is set to Public and Steam ID is correct.");
                     }
                 });
                 // Prefill update user input if user wasn't found

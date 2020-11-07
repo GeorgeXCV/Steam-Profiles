@@ -15,8 +15,17 @@ db.once('open', function() {
     console.log("Database Live!")
 
     const SteamProfileSchema = new mongoose.Schema({
-        steamUsername: String,
-        steamUserID: String,
+        steamUsername: {
+            type: String,
+            required: true,
+        },
+        steamUserID: {
+            type: String,
+            required: true,
+            index: {
+                unique: true,
+            }
+        },
         nickname: String,
         avatar: String,
         completedGames: String,
@@ -24,10 +33,11 @@ db.once('open', function() {
         unearnedAchievements: String,
         completion: String,
         Games: {
-
+            type: Array
         }
+      }, {
+        collation: {locale: 'en', strength: 2} // Allow case insensitive queries to work
     })
-    
     module.exports.SteamProfile = mongoose.model('SteamProfile', SteamProfileSchema);
   });
 
