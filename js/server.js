@@ -122,3 +122,7 @@ app.get('/:username/achievements/:game/:appID', runAsyncWrapper(async(req, res) 
       return res.status(404).sendFile(errorPagePath);
     }
   }))
+
+  app.use(function(req,res){
+    return res.status(404).sendFile(errorPagePath);
+  });

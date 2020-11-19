@@ -62,7 +62,6 @@ module.exports = {
           const filter = { steamUserID: userID };
           const update = { nickname: profile.nickname, avatar: profile.avatar.medium};
           const user = await database.SteamProfile.findOneAndUpdate(filter, update);
-          console.log(user);
           return user;
         }
     } catch (error) {

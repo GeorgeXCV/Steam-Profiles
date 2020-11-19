@@ -14,7 +14,6 @@ a {
 h1 {
     color: white;
     font-size: 35px;
-    font-family: "Roboto";
     font-weight: 800;
     position:relative;    
     left: 0;
@@ -31,7 +30,6 @@ h1 {
 .username {
     color: white;
     font-size: 25px;
-    font-family: "Roboto";
     font-weight: 800;
     float: left;
     padding-left: 5px;
@@ -41,14 +39,12 @@ h1 {
 .title {
     color: white;
     font-size: 20px;
-    font-family: "Roboto";
     font-weight: 900; 
     text-align: left;
 }
 
 .progress {  
     color: white;
-    font-family: "Roboto";
     font-weight: bold;
     font-size: 16px;
     text-align: left;
@@ -56,7 +52,6 @@ h1 {
 
 .playtime {
     color: #56707f;
-    font-family: "Roboto";
     font-size: 16px;
 }
 

@@ -47,7 +47,7 @@ h2 {
   border-radius:5px;
   border-color: green;
   color: white;
-  font-family: 'Roboto';
+  font-family: inherit;  
   font-weight: 500;
   font-size: 1.2rem;
   line-height: 1.9rem;
